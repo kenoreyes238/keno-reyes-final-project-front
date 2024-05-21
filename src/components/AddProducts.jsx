@@ -96,7 +96,7 @@ export default function AddProducts() {
                     </tr>
                 </tbody>
             </Table>
-            <Button onSubmit={handleAddProduct}>
+            <Button onSubmit={handleAddProduct} variant="primary">
                 Add Product
             </Button>
         </div>

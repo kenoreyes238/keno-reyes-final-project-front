@@ -117,6 +117,9 @@ h4 {
 
     Button {
       background-color: #0077b6;
+      color: white;
+      border: none;
+      border-radius: 5px;
       margin-top: 1rem;
       margin-left: 1rem;
       width: 8rem;

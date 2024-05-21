@@ -6,15 +6,6 @@ export default function Login() {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
-    // const handleSubmit = (e) => {
-    //     try {
-    //         e.preventDefault();
-    //         navigate("/"); 
-    //     } catch (err) {
-    //         console.log("Failed to sign in");
-    //     }
-    // }
-
     const handleSubmit = async (e) => {
         e.preventDefault();
     
@@ -23,7 +14,7 @@ export default function Login() {
             return;
         }
     
-        const response = await fetch("http://localhost:3002/login", {
+        const response = await fetch("http://localhost:3001/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

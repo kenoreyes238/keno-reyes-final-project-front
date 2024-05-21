@@ -2,7 +2,7 @@ export default function Navbar() {
     const handleSignOut = async () => {
         try {
             const jwtToken = localStorage.getItem('jwt'); // Assuming you're storing the JWT token in localStorage
-            const response = await fetch('http://localhost:3002/logout', {
+            const response = await fetch('http://localhost:3001/logout', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
