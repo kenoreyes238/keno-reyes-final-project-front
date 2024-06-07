@@ -1,38 +1,36 @@
 import { useState } from "react";
-import { Table, Button } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Table from "react-bootstrap/Table";
 
-export default function AddProducts() {
+export default function AddProducts({ onProductAdded }) {
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
     const [quantity, setQuantity] = useState("");
-    const [sum, setSum] = useState("");
-    const [total, setTotal] = useState("");
+    const [amount, setAmount] = useState(0);
 
     const handleName = (e) => {
         setName(e.target.value);
     }
 
     const handleQty = (e) => {
-        const newQty = parseInt(e.target.value);
-        if(!isNaN(newQty)) {
+        const newQty = parseInt(e.target.value, 10);
+        if (!isNaN(newQty)) {
             setQuantity(newQty);
-            handleAdd(price, newQty);
+            setAmount(newQty * price);
         }
     }
 
-    const handleAdd = (price, quantity) => {
-        const newTotal = price * quantity;
-        setTotal(newTotal);
-    }
-
     const handlePrice = (e) => {
-        setPrice(e.target.value);
-        handleAdd(e.target.value, quantity);
+        const newPrice = parseFloat(e.target.value);
+        if (!isNaN(newPrice)) {
+            setPrice(newPrice);
+            setAmount(newPrice * quantity);
+        }
     }
 
     const handleAddProduct = async () => {
         try {
-            const response = await fetch('http://localhost:3002/addProduct', {
+            const response = await fetch('http://localhost:3001/addProduct', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -40,15 +38,25 @@ export default function AddProducts() {
                 body: JSON.stringify({
                     name,
                     price,
-                    quantity
+                    quantity,
+                    amount
                 })
             });
             const data = await response.json();
+            if (data.success) {
+                console.log("Product added successfully!");
+                setName("");
+                setPrice("");
+                setQuantity("");
+                setAmount(0);
+                onProductAdded();
+            } else {
+                console.error("Failed to add product:", data.message);
+            }
         } catch (error) {
             console.error('Error adding product:', error);
         }
     }
-    
 
     return (
         <div className="addProducts">
@@ -58,7 +66,7 @@ export default function AddProducts() {
                         <th>Name</th>
                         <th>Price</th>
                         <th>Quantity</th>
-                        <th>Amount</th>  
+                        <th>Amount</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -66,14 +74,14 @@ export default function AddProducts() {
                         <td>
                             <input 
                                 type="text"
-                                placeholder="product name"
+                                placeholder="Product name"
                                 value={name}
                                 onChange={handleName}
                             />
                         </td>
                         <td>
                             <input 
-                                type="text"
+                                type="number"
                                 placeholder="$0"
                                 value={price}
                                 onChange={handlePrice}
@@ -91,12 +99,14 @@ export default function AddProducts() {
                             <input 
                                 type="number"
                                 placeholder="0"
+                                value={amount}
+                                readOnly
                             />
                         </td>
                     </tr>
                 </tbody>
             </Table>
-            <Button onSubmit={handleAddProduct} variant="primary">
+            <Button onClick={handleAddProduct} variant="primary">
                 Add Product
             </Button>
         </div>

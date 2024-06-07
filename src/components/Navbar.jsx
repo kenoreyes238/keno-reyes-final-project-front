@@ -10,7 +10,7 @@ export default function Navbar() {
                 }
             });
             if (response.ok) {
-                window.location.href = '/login';
+                window.location.href = '/';
             } else {
                 console.error('Sign-out failed:', await response.json());
             }

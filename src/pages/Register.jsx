@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import apiService from "../services/ApiServices";
 
 export default function Register() {
     const navigate = useNavigate();
@@ -12,36 +13,29 @@ export default function Register() {
         e.preventDefault();
         
         try {
-            const response = await fetch('http://localhost:3002/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(values)
-            });
-            if (response.ok) {
-                const data = await response.json();
-                navigate("/login");
-                console.log(data);
+            const { jwt, success } = await apiService.register(values.email, values.password);
+            if(success) {
+               localStorage.setItem('inventory-app-jwt', jwt); 
             } else {
-                const errorData = await response.json();
-                console.error('Registration failed:', errorData);
+                alert('Error registering account');
             }
+            
+            navigate("/");
+            // console.log(data);
         } catch (error) {
             console.error('Error during registration:', error);
         }
     }
 
-
     return (
-        <div className="containerLogin">
+        <div className="containerRegister">
             <h1>MyInventory</h1>
-            <div className="loginBlock">
-                <h1 className="center">Register your account</h1>
+            <div className="registerBlock">
+                <h1>Register your account</h1>
                 <form onSubmit={handleSubmit}>
-                    <div>
-                        <h4>Already have an account?</h4>
-                        <p className="registerLink" onClick={() => navigate("/login")}>
+                    <div className="linkToLogin">
+                        <p>Already have an account?&nbsp;</p>
+                        <p className="registerLink" onClick={() => navigate("/")}>
                             Sign in here
                         </p>
                     </div>

@@ -3,7 +3,7 @@
   padding: 0;
 }
 
-/* LOGIN PAGE */
+/*login page*/
 .containerLogin {
   background-color: #edede9;
   display: flex;
@@ -12,6 +12,14 @@
   align-items: center;
   flex-wrap: nowrap;
   height: 100vh;
+}
+
+h1 {
+  padding-bottom: 1rem;
+}
+
+h1 h2 {
+  font-weight: 700;
 }
 
 .loginBlock {
@@ -32,6 +40,7 @@ h4 {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 1rem;
 }
 
 .registerLink {
@@ -54,6 +63,10 @@ h4 {
   min-width: 150px;
 }
 
+p:hover {
+  color: #0077b6;
+}
+
 .inputFields {
   display: flex;
   flex-direction: column;
@@ -70,12 +83,40 @@ h4 {
   border-radius: 10px;
   border: 1px rgb(85, 85, 85) solid;
   min-width: 200px;
-  width: 250px;
-  height: 30px;
+  width: 20rem;
+  height: 2.5rem;
   margin: 0.5rem 0 0.5rem 0;
 }
 
-/* MAIN PAGE */
+.containerRegister {
+  background-color: #edede9;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  height: 100vh;
+}
+
+.registerBlock {
+  background-color:#edede9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+  height: 55%;
+  border: 1px solid rgb(180, 180, 180);
+  border-radius: 10px;
+  min-width: 400px;
+  min-height: 400px;
+}
+
+.linkToLogin {
+  display: flex;
+  padding: 0.5rem;
+}
+
 .containerWrap {
   
   .navbar {
@@ -115,25 +156,30 @@ h4 {
     padding: 5rem;
     width: 75rem;
 
-    Button {
-      background-color: #0077b6;
-      color: white;
+    input {
       border: none;
-      border-radius: 5px;
+    }
+
+    Button {
       margin-top: 1rem;
       margin-left: 1rem;
       width: 8rem;
-      height: 3rem;
+      height: 5rem;
     }
   }
 }
 
 .products {
   padding: 5rem;
-  width: 80rem;
+  width: 90rem;
+
+  input {
+    border: none;
+  }
 
   .productBtns {
     width: 4.5rem;
+    margin: 1.5px;
   }
 }
 
