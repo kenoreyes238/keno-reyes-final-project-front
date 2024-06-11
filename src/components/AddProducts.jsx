@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
+import apiService from "../services/ApiServices";
 
 export default function AddProducts({ onProductAdded }) {
     const [name, setName] = useState("");
@@ -30,19 +31,7 @@ export default function AddProducts({ onProductAdded }) {
 
     const handleAddProduct = async () => {
         try {
-            const response = await fetch('http://localhost:3001/addProduct', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    name,
-                    price,
-                    quantity,
-                    amount
-                })
-            });
-            const data = await response.json();
+            const data = await apiService.addProduct(name, price, quantity, amount);
             if (data.success) {
                 console.log("Product added successfully!");
                 setName("");
@@ -106,7 +95,7 @@ export default function AddProducts({ onProductAdded }) {
                     </tr>
                 </tbody>
             </Table>
-            <Button onClick={handleAddProduct} variant="primary">
+            <Button className="addBtn" onClick={handleAddProduct} variant="success">
                 Add Product
             </Button>
         </div>

@@ -1,6 +1,7 @@
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 import { useState } from "react";
+import apiService from "../services/ApiServices";
 
 export default function Products({ products, fetchProducts }) {
     const [editProduct, setEditProduct] = useState(null);
@@ -8,10 +9,7 @@ export default function Products({ products, fetchProducts }) {
 
     const handleDeleteProduct = async (productId) => {
         try {
-            const response = await fetch(`http://localhost:3001/deleteProduct/${productId}`, {
-                method: 'DELETE',
-            });
-            const data = await response.json();
+            const data = await apiService.deleteProduct(productId);
             if (data.success) {
                 fetchProducts();
             }
@@ -35,19 +33,7 @@ export default function Products({ products, fetchProducts }) {
 
     const handleSaveChanges = async () => {
         try {
-            const response = await fetch(`http://localhost:3001/editProduct/${editProduct}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    name: editedProduct.name,
-                    price: editedProduct.price,
-                    quantity: editedProduct.quantity,
-                    amount: editedProduct.price * editedProduct.quantity
-                })
-            });
-            const data = await response.json();
+            const data = await apiService.editProduct(editProduct, editedProduct);
             if (data.success) {
                 fetchProducts();
                 setEditProduct(null);
@@ -135,7 +121,7 @@ export default function Products({ products, fetchProducts }) {
                                     </>
                                 ) : (
                                     <>
-                                        <Button variant="primary" onClick={() => handleEditClick(row)} className="productBtns">
+                                        <Button variant="success" onClick={() => handleEditClick(row)} className="productBtns">
                                             Edit
                                         </Button>
                                         <Button variant="danger" onClick={() => handleDeleteProduct(row.id)} className="productBtns">

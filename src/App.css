@@ -15,11 +15,11 @@
 }
 
 h1 {
-  padding-bottom: 1rem;
+  padding-bottom: 3rem;
 }
 
 h1 h2 {
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .loginBlock {
@@ -36,35 +36,33 @@ h1 h2 {
     min-height: 400px;
 }
 
-h4 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
+p {
+  text-align: center;
+}
+
+.registerLink:hover {
+  color: #0077b6;
 }
 
 .registerLink {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-bottom: 0.5em;
+  color: rgb(66, 66, 66);
   cursor: pointer;
 }
 
 .loginBtn {
   display: block;
   margin: 1em auto;
-  height: 2em;
+  height: 3em;
+  width: 20rem;
   font-size: 1rem;
-  background-color: #0077b6;
+  background-color: #582f0e;
   color: white;
   border: none;
   border-radius: 10px;
   min-width: 150px;
-}
-
-p:hover {
-  color: #0077b6;
 }
 
 .inputFields {
@@ -124,7 +122,8 @@ p:hover {
     flex-direction: row;
     justify-content: space-between;
     padding: 15px;
-    background-color: #0077b6;
+    height: 7rem;
+    background-color: #582f0e;
     color: white;
   
     h3 {
@@ -144,7 +143,7 @@ p:hover {
     }
 
     .signOut:hover {
-      background-color: rgb(15, 4, 56);
+      background-color: #656d4a;
       color: white;
     }
   }
@@ -154,17 +153,18 @@ p:hover {
     justify-content: center;
     align-items: center;
     padding: 5rem;
-    width: 75rem;
+    width: 80rem;
 
     input {
       border: none;
     }
 
-    Button {
-      margin-top: 1rem;
+    .addBtn {
+      margin-bottom: 1rem;
       margin-left: 1rem;
       width: 8rem;
       height: 5rem;
+      border: none;
     }
   }
 }
@@ -182,67 +182,3 @@ p:hover {
     margin: 1.5px;
   }
 }
-
-  /* .addProducts {
-    padding: 45px 0 0 90px;
-  
-    .addHeader {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 80%;
-    }
-  
-    .tableHeader {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      width: 53%;
-    }
-  
-    .tableInputs {
-      display: flex;
-  
-      input {
-        margin-right: 0.1rem;
-        width: 18rem;
-        height: 2rem;
-        border-radius: 5px;
-        border: 1px solid rgb(143, 143, 143);
-      }
-  
-      button {
-        margin-left: 0.1rem;
-        margin-top: 0.5rem;
-        margin-right: 1.5rem;
-        height: 35px;
-        width: 100px;
-        border: none;
-        border-radius: 5px;
-        font-family: "Inter";
-        font-weight: 500;
-        background-color: #0077b6;
-        color: white;
-      }
-  
-      .tableTotal {
-        
-        input {
-          width: 100px !important;
-          margin-left: 7rem;
-        }
-      }
-    }
-  }
-
-  .products {
-    padding: 45px 0 0 90px;
-
-    .productHeader {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 80%;
-    }
-  }
-} */

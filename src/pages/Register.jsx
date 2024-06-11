@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 import apiService from "../services/ApiServices";
 
 export default function Register() {
@@ -31,7 +34,7 @@ export default function Register() {
         <div className="containerRegister">
             <h1>MyInventory</h1>
             <div className="registerBlock">
-                <h1>Register your account</h1>
+                <h2>Register your account</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="linkToLogin">
                         <p>Already have an account?&nbsp;</p>
@@ -41,38 +44,51 @@ export default function Register() {
                     </div>
                     <div className="inputFields">
                         <label>
-                            Email 
-                            <input 
-                                className="textField" 
-                                type="email" 
-                                placeholder="email"
-                                onChange={e => setValues({...values, email: e.target.value})}
-                                required
-                            />
+                            <FloatingLabel
+                                label="Email"
+                                className="mb-3"
+                            >
+                                <Form.Control 
+                                    type="email" 
+                                    placeholder="name@example.com" 
+                                    className="textField" 
+                                    onChange={e => setValues(e.target.value)}
+                                    required
+                                />
+                            </FloatingLabel>
+                            </label>
+                        <label>
+                            <FloatingLabel
+                                label="Password"
+                                className="mb-3"
+                            >
+                                <Form.Control 
+                                    type="password"  
+                                    className="textField" 
+                                    placeholder="password" 
+                                    onChange={e => setValues(e.target.value)}
+                                    required
+                                />
+                            </FloatingLabel>
                         </label>
                         <label>
-                            Password
-                            <input 
+                        <FloatingLabel
+                            label="Verify Password"
+                            className="mb-3"
+                        >
+                            <Form.Control 
+                                type="password"  
                                 className="textField" 
-                                type="password" 
-                                placeholder="password"
-                                onChange={e => setValues({...values, password: e.target.value})}
-                                required
-                            />
-                        </label>
-                        <label>
-                            Verify Password
-                            <input 
-                                className="textField" 
-                                type="password" 
                                 placeholder="password" 
+                                onChange={e => setValues(e.target.value)}
                                 required
                             />
+                        </FloatingLabel>
                         </label>
                     </div>
-                    <button className="loginBtn" type="submit">
+                    <Button className="loginBtn" type="submit">
                         Sign Up
-                    </button>
+                    </Button>
                 </form>
             </div>
         </div>

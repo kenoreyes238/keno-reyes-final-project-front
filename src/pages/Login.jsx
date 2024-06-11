@@ -1,5 +1,8 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 import apiService from "../services/ApiServices";
 
 export default function Login() {
@@ -16,8 +19,9 @@ export default function Login() {
       }
     
       try {
-        const { success } = await apiService.login(email, password);
+        const { jwt, success } = await apiService.login(email, password);
         if(success) {
+          localStorage.setItem('jwtToken', jwt);
           navigate("/main");
         } else {
           alert ('Error logging in');
@@ -32,37 +36,47 @@ export default function Login() {
       <div className="containerLogin">
         <h1>MyInventory</h1>
         <div className="loginBlock">
-          <h2 className="center">Sign in</h2>
+          <h2>Sign in</h2>
           <form onSubmit={handleSubmit}>
             <div>
-              <h4>Don&apos;t have an account with us?</h4>
+              <p>Don&apos;t have an account with us?</p>
               <p className="registerLink" onClick={() => navigate("/register")}>
                 Register Here
               </p>
             </div>
             <div className="inputFields">
               <label>
-                Email 
-                <input 
-                  className="textField" 
-                  type="email" 
-                  onChange={e => setEmail(e.target.value)}
-                  required
-                />
+                <FloatingLabel
+                  label="Email"
+                  className="mb-3"
+                >
+                  <Form.Control 
+                    type="email" 
+                    placeholder="name@example.com" 
+                    className="textField" 
+                    onChange={e => setEmail(e.target.value)}
+                    required
+                  />
+                </FloatingLabel>
               </label>
               <label>
-                Password
-                <input 
-                  className="textField" 
-                  type="password" 
-                  onChange={e => setPassword(e.target.value)}
-                  required
-                />
+              <FloatingLabel
+                  label="Password"
+                  className="mb-3"
+                >
+                  <Form.Control 
+                    type="password"  
+                    className="textField" 
+                    placeholder="password" 
+                    onChange={e => setPassword(e.target.value)}
+                    required
+                  />
+                </FloatingLabel>
               </label>
             </div>
-            <button className="loginBtn" type="submit">
+            <Button className="loginBtn" type="submit">
               Login
-            </button>
+            </Button>
           </form>
         </div>
       </div>
